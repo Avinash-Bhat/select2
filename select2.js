@@ -537,7 +537,6 @@ the specific language governing permissions and limitations under the Apache Lic
      */
     function defaultTokenizer(input, selection, selectCallback, opts) {
         var original = input, // store the original so we can compare and know if we need to tell the search to update its text
-            dupe = false, // check for whether a token we extracted represents a duplicate selected choice
             token, // token
             index, // position at which the separator was found
             i, l, // looping variables
@@ -562,14 +561,7 @@ the specific language governing permissions and limitations under the Apache Lic
             if (token.length > 0) {
                 token = opts.createSearchChoice(token, selection);
                 if (token !== undefined && token !== null && opts.id(token) !== undefined && opts.id(token) !== null) {
-                    dupe = false;
-                    for (i = 0, l = selection.length; i < l; i++) {
-                        if (equal(opts.id(token), opts.id(selection[i]))) {
-                            dupe = true; break;
-                        }
-                    }
-
-                    if (!dupe) selectCallback(token);
+                    selectCallback(token);
                 }
             }
         }
