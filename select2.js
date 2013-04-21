@@ -2622,16 +2622,10 @@ the specific language governing permissions and limitations under the Apache Lic
 
         // multi
         setVal: function (val) {
-            var unique;
             if (this.select) {
                 this.select.val(val);
             } else {
-                unique = [];
-                // filter out duplicates
-                $(val).each(function () {
-                    if (indexOf(this, unique) < 0) unique.push(this);
-                });
-                this.opts.element.val(unique.length === 0 ? "" : unique.join(this.opts.separator));
+                this.opts.element.val(val.length === 0 ? "" : val.join(this.opts.separator));
             }
         },
 
